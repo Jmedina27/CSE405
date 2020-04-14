@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        window.open("home.html");
+        window.alert("signed in")
     } else {
         // No user is signed in.
     }
