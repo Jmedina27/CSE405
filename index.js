@@ -21,3 +21,13 @@ function login() {
     });
 
 }
+
+function signUp() {
+    var email = document.getElementById("email");
+    var passwd = document.getElementById("password");
+
+    const promise = auth.createUserWithEmailAndPassword(email.value, passwd.value);
+    promise.catch( e => alert(e.message));
+
+    alert("Signed Up");
+}
