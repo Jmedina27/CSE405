@@ -1,7 +1,16 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        document.getElementById("user").innerHTML = "You have signed in as " + user.email;
+        document.getElementById("logged-in").style.display = "inline";
+        document.getElementById("login").style.display = "none";
+        console.log(user.displayName)
+        document.getElementBy
+ 
         // User is signed in.
-        window.alert("signed in")
+        if (user != null)  {
+            console.log("signed-in as " + user.email)
+
+        }
     } else {
         // No user is signed in.
     }
@@ -30,4 +39,11 @@ function signUp() {
     promise.catch( e => alert(e.message));
 
     alert("Signed Up");
+}
+
+function logOut() {
+    firebase.auth().signOut();
+    document.getElementById("logged-in").style.display = "none";
+    document.getElementById("login").style.display = "inline";
+    console.log("signed-out")
 }
