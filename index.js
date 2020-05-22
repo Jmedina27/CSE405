@@ -46,4 +46,6 @@ function logOut() {
     document.getElementById("logged-in").style.display = "none";
     document.getElementById("login").style.display = "inline";
     console.log("signed-out")
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
 }
