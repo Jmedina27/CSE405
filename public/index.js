@@ -1,25 +1,25 @@
-var userEmail = document.getElementById("email").value;
-//var rootRef = firebase.database().ref('Users');
+
 //rootRef.orderByChild('email').equalTo(userEmail).on("value", function(snapshot) {
 //    snapshot.forEach((function(child) { console.log(parent.key) }));
 //});
 
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        var userEmail = document.getElementById("email").value;
-        var fields = userEmail.split('@');
-        var userName = fields[0];
         document.getElementById("user").innerHTML = "You have signed in as " + user.email;
         document.getElementById("logged-in").style.display = "inline";
         document.getElementById("login").style.display = "none";
-        console.log(user.displayName)
-        console.log(userName);
-        //document.getElementBy
- 
-        // User is signed in.
-        if (user != null)  {
-            console.log("signed-in as " + user.email)
+        document.getElementById("signup").style.display = "none";
+        /*
+        db.collection('users').doc(user.uid).get().then(doc => {
+            var userName, userEmail, userAge, userBio = document.createElement('p');
+            userName.innerHTML = "Name : " + doc.data().name;
+            document.getElementById("logged-in").appendChild(userName);
+        })*/
 
+        // User is signed in.
+        if (user != null) {
+            console.log("signed-in as " + user.email)
         }
     } else {
         // No user is signed in.
@@ -27,29 +27,57 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 
+function loginPage() {
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("login").style.display = "inline";
+}
+
 function login() {
     var userEmail = document.getElementById("email").value;
     var userPassword = document.getElementById("password").value;
-    
+
     firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
 
         window.alert("Error : " + errorMessage);
-
     });
+}
 
+function signUpPage() {
+    document.getElementById("signup").style.display = "inline";
+    document.getElementById("login").style.display = "none";
 }
 
 function signUp() {
-    var email = document.getElementById("email");
-    var passwd = document.getElementById("password");
+    var signupEmail = document.getElementById("signup-email").value;
+    var signupPassword = document.getElementById("signup-password").value;
+    var signupRetypePassword = document.getElementById("signup-retype-password").value;
+    var signupName = document.getElementById("signup-name").value;
+    var signupAge = document.getElementById("signup-age").value;
+    var signupBio = document.getElementById("signup-bio").value;
 
-    const promise = auth.createUserWithEmailAndPassword(email.value, passwd.value);
-    promise.catch( e => alert(e.message));
+    if (signupPassword == signupRetypePassword) {
 
-    alert("Signed Up");
+        var prom = firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword);
+        prom.catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            window.alert("Error : " + errorMessage);
+        });
+        prom.then(cred => {
+            return db.collection('users').doc(auth.currentUser.uid).set({
+                name: signupName,
+                email: signupEmail,
+                age: signupAge,
+                bio: signupBio
+            });
+        })
+    }
+    else {
+        alert("Passwords do not match!")
+    }
 }
 
 function logOut() {
@@ -59,4 +87,10 @@ function logOut() {
     console.log("signed-out")
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
+    document.getElementById("signup-email").value = "";
+    document.getElementById("signup-password").value = "";
+    document.getElementById("signup-retype-password").value = "";
+    document.getElementById("signup-name").value = "";
+    document.getElementById("signup-age").value = "";
+    document.getElementById("signup-bio").value = "";
 }

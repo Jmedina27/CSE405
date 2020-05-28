@@ -25,6 +25,23 @@ body {
     -moz-box-shadow: 0px 0px 25px 5px rgb(253, 103, 83);
     box-shadow: 0px 0px 25px 5px rgb(253, 103, 83);
 }
+
+.signup-form {
+    display: none;
+    width: 400px;
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #3E4F60;
+    text-align: center;
+    opacity: 0.86;
+    -webkit-box-shadow: 0px 0px 25px 5px rgb(253, 103, 83);
+    -moz-box-shadow: 0px 0px 25px 5px rgb(253, 103, 83);
+    box-shadow: 0px 0px 25px 5px rgb(253, 103, 83);
+}
+
 .signed-form {
     display: none;
     width: 600px;
@@ -51,12 +68,12 @@ body {
     color: rgb(253, 103, 83);
 }
 
-.login-form h1 {
+.login-form h1, .signup-form h1 {
     color: aliceblue;
     margin-top: 0px;
     line-height: 40px;
 }
-.login-text {
+.login-text, .signup-text {
     width: 85%;
     outline: none;
     border-radius: 20px;
@@ -74,14 +91,14 @@ body {
     letter-spacing: 1px;
 }
 
-.login-text:focus {
+.login-text:focus, .signup-text:focus {
     -webkit-box-shadow: 0px 0px 2px 3px rgb(253, 103, 83);
     -moz-box-shadow: 0px 0px 2px 3px rgb(253, 103, 83);
     box-shadow: 0px 0px 2px 3px rgb(253, 103, 83);
 
 }
 
-.login-button {
+.login-button, .signup-button {
     margin-right: auto;
     margin-left: auto;
     display: table;
@@ -102,8 +119,21 @@ body {
     letter-spacing: 1px;
 }
 
-.login-button:hover {
+.login-button:hover, .signup-button:hover {
     background: rgb(253, 103, 83);
     color: black;
     font-weight: bold;
+}
+
+.login-signup-button, .signup-login-button {
+    border: none;
+    background: transparent;
+    color: rgb(253, 103, 83);
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.show-password {
+    color: white;
 }
