@@ -66,6 +66,10 @@ body {
 
 .signed-form p {
     color: rgb(253, 103, 83);
+    font-size: 20px;
+    text-align: left;
+    padding-left: 150px;
+    
 }
 
 .login-form h1, .signup-form h1 {
@@ -132,8 +136,4 @@ body {
     font-weight: bold;
     font-size: 14px;
     margin-top: 20px;
-}
-
-.show-password {
-    color: white;
 }

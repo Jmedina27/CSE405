@@ -3,23 +3,22 @@
 //    snapshot.forEach((function(child) { console.log(parent.key) }));
 //});
 
-
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        document.getElementById("user").innerHTML = "You have signed in as " + user.email;
+        //document.getElementById("user").innerHTML = "You have signed in as " + user.email;
         document.getElementById("logged-in").style.display = "inline";
         document.getElementById("login").style.display = "none";
         document.getElementById("signup").style.display = "none";
-        /*
         db.collection('users').doc(user.uid).get().then(doc => {
-            var userName, userEmail, userAge, userBio = document.createElement('p');
-            userName.innerHTML = "Name : " + doc.data().name;
-            document.getElementById("logged-in").appendChild(userName);
-        })*/
+            var userName = document.getElementById('user-name').innerHTML = "Name : " + doc.data().name;
+            var userEmail = document.getElementById('user-email').innerHTML = "Email : " + doc.data().email;
+            var userName = document.getElementById('user-age').innerHTML = "Age : " + doc.data().age;
+            var userName = document.getElementById('user-major').innerHTML = "Bio : " + doc.data().major;
+        });
 
         // User is signed in.
         if (user != null) {
-            console.log("signed-in as " + user.email)
+            console.log("signed-in as " + user.email);
         }
     } else {
         // No user is signed in.
@@ -56,7 +55,7 @@ function signUp() {
     var signupRetypePassword = document.getElementById("signup-retype-password").value;
     var signupName = document.getElementById("signup-name").value;
     var signupAge = document.getElementById("signup-age").value;
-    var signupBio = document.getElementById("signup-bio").value;
+    var signupMajor = document.getElementById("signup-major").value;
 
     if (signupPassword == signupRetypePassword) {
 
@@ -71,7 +70,7 @@ function signUp() {
                 name: signupName,
                 email: signupEmail,
                 age: signupAge,
-                bio: signupBio
+                major: signupMajor
             });
         })
     }
@@ -82,6 +81,10 @@ function signUp() {
 
 function logOut() {
     firebase.auth().signOut();
+    var userName = document.getElementById('user-name').innerHTML = "Name : " + doc.data().name;
+    document.getElementById('user-email').innerHTML = "";
+    document.getElementById('user-age').innerHTML = "";
+    document.getElementById('user-major').innerHTML = "";
     document.getElementById("logged-in").style.display = "none";
     document.getElementById("login").style.display = "inline";
     console.log("signed-out")
@@ -92,5 +95,6 @@ function logOut() {
     document.getElementById("signup-retype-password").value = "";
     document.getElementById("signup-name").value = "";
     document.getElementById("signup-age").value = "";
-    document.getElementById("signup-bio").value = "";
+    document.getElementById("signup-major").value = "";
+
 }

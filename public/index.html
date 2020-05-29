@@ -29,7 +29,7 @@
         <h1 id="title">Firebase Sign Up Page</h1>
         <input type="text" id="signup-name" class="signup-text" placeholder="Enter Your Name">
         <input type="text" id="signup-age" class="signup-text" placeholder="Enter Your Age">
-        <textarea name="bio message" id="signup-bio" class="signup-text" placeholder="Enter a short Description about yourself" rows="2"></textarea>
+        <textarea name="major" id="signup-major" class="signup-text" placeholder="Enter Your Major" rows="1"></textarea>
         <input type="email" id="signup-email" class="signup-text" placeholder="Enter Email Address">
         <input type="password" id="signup-password" class="signup-text" placeholder="Enter Password">
         <input type="password" id="signup-retype-password" class="signup-text" placeholder="Retype Password">
@@ -38,7 +38,11 @@
     </div>
     <div class="signed-form" id="logged-in">
         <h1>Welcome To Firebase Web App</h1>
-        <p id="user"></p>
+        <p id="user" contenteditable="true"></p>
+        <p id="user-name"></p>
+        <p id="user-email"></p>
+        <p id="user-age"></p>
+        <p id="user-major"></p>
         <button onclick="logOut()" class="login-button">Logout</button>
     </div>
     <script src="index.js"></script>
