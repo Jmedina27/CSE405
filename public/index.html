@@ -38,11 +38,13 @@
     </div>
     <div class="signed-form" id="logged-in">
         <h1>Welcome To Firebase Web App</h1>
-        <p id="user" contenteditable="true"></p>
-        <p id="user-name"></p>
+        <p id="user-name" ></p>
         <p id="user-email"></p>
         <p id="user-age"></p>
         <p id="user-major"></p>
+        <button onclick="editInfo()" id="edit-text" class="edit-button">Edit Information</button>
+        <button onclick="cancel()" id="cancel-change" class="cancel-button">Cancel</button>
+        <button onclick="saveInfo()" id="save-text" class="save-button">Save Changes</button>
         <button onclick="logOut()" class="login-button">Logout</button>
     </div>
     <script src="index.js"></script>

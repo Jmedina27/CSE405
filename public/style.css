@@ -69,6 +69,7 @@ body {
     font-size: 20px;
     text-align: left;
     padding-left: 150px;
+    line-height: 20px;
     
 }
 
@@ -137,3 +138,17 @@ body {
     font-size: 14px;
     margin-top: 20px;
 }
+
+.edit-button, .cancel-button, .save-button {
+    border: none;
+    background: transparent;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.edit-button:hover, .save-button:hover {
+    color: rgb(253, 103, 83);
+}
+

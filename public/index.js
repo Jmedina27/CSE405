@@ -9,11 +9,14 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("logged-in").style.display = "inline";
         document.getElementById("login").style.display = "none";
         document.getElementById("signup").style.display = "none";
+        document.getElementById("edit-text").style.display = "inline";
+        document.getElementById("save-text").style.display = "none";
+        document.getElementById("cancel-change").style.display = "none";
         db.collection('users').doc(user.uid).get().then(doc => {
-            var userName = document.getElementById('user-name').innerHTML = "Name : " + doc.data().name;
-            var userEmail = document.getElementById('user-email').innerHTML = "Email : " + doc.data().email;
-            var userName = document.getElementById('user-age').innerHTML = "Age : " + doc.data().age;
-            var userName = document.getElementById('user-major').innerHTML = "Bio : " + doc.data().major;
+            var userName = document.getElementById('user-name').innerHTML = "Name:  " + doc.data().name;
+            var userEmail = document.getElementById('user-email').innerHTML = "Email: " + doc.data().email;
+            var userName = document.getElementById('user-age').innerHTML = "Age: " + doc.data().age;
+            var userName = document.getElementById('user-major').innerHTML = "Major: " + doc.data().major;
         });
 
         // User is signed in.
@@ -25,7 +28,64 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+function editInfo() {
+    document.getElementById("edit-text").style.display = "none";
+    document.getElementById("save-text").style.display = "inline";
+    document.getElementById("cancel-change").style.display = "inline";
+    var age = document.getElementById("user-age");
+    age.contentEditable = "true";
+    var major = document.getElementById("user-major");
+    major.contentEditable = "true";
+    var ageValue = age.innerHTML;
+    var majorValue = major.innerHTML;
+    console.log("Now in Edit Mode");
+}
 
+function cancel() {
+    document.getElementById("edit-text").style.display = "inline";
+    document.getElementById("save-text").style.display = "none";
+    document.getElementById("cancel-change").style.display = "none";
+    var age = document.getElementById("user-age");
+    age.contentEditable = "false";
+    var major = document.getElementById("user-major");
+    major.contentEditable = "false";
+    db.collection('users').doc(firebase.auth().currentUser.uid).get().then(doc => {
+        document.getElementById('user-name').innerHTML = "Name:  " + doc.data().name;
+        document.getElementById('user-email').innerHTML = "Email: " + doc.data().email;
+        document.getElementById('user-age').innerHTML = "Age: " + doc.data().age;
+        document.getElementById('user-major').innerHTML = "Major: " + doc.data().major;
+    });
+    //location.reload();
+}
+
+function saveInfo() {
+    document.getElementById("edit-text").style.display = "inline";
+    document.getElementById("save-text").style.display = "none";
+    document.getElementById("cancel-change").style.display = "none";
+    var age = document.getElementById("user-age");
+    age.contentEditable = "false";
+    var major = document.getElementById("user-major");
+    major.contentEditable = "false";
+    var ageValue = age.textContent;
+    var majorValue = major.textContent;
+    var x = ageValue.split(':');
+    var y = majorValue.split(':');
+    var z = x[0]
+    var newAge = x[1];
+    var newMajor = y[1];
+    console.log(z + " " + newAge + " " + newMajor);
+    document.getElementById("user-age").innerHTML = "Age: " + newAge;
+    document.getElementById("user-major").innerHTML = "Major: " + newMajor;
+
+    var userid = firebase.auth().currentUser.uid;
+    
+    db.collection('users').doc(userid).update({
+        age: newAge,
+        major: newMajor
+    });
+
+
+}
 function loginPage() {
     document.getElementById("signup").style.display = "none";
     document.getElementById("login").style.display = "inline";
@@ -81,10 +141,6 @@ function signUp() {
 
 function logOut() {
     firebase.auth().signOut();
-    var userName = document.getElementById('user-name').innerHTML = "Name : " + doc.data().name;
-    document.getElementById('user-email').innerHTML = "";
-    document.getElementById('user-age').innerHTML = "";
-    document.getElementById('user-major').innerHTML = "";
     document.getElementById("logged-in").style.display = "none";
     document.getElementById("login").style.display = "inline";
     console.log("signed-out")
@@ -96,5 +152,8 @@ function logOut() {
     document.getElementById("signup-name").value = "";
     document.getElementById("signup-age").value = "";
     document.getElementById("signup-major").value = "";
-
+    document.getElementById("user-name").innerHTML = "";
+    document.getElementById("user-email").innerHTML = "";
+    document.getElementById("user-age").innerHTML = "";
+    document.getElementById("user-major").innerHTML = "";
 }
